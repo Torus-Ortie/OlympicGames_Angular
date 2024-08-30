@@ -5,10 +5,11 @@
     transform: translate(-50%, 0%);
 }
 .home-graph {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    position: relative;
+    left: 50%;
+    transform: translate(-20%, 0%);
 }
-h2 {
+h1 {
     text-align: center;
     margin: 1%;
     background-color: skyblue;
