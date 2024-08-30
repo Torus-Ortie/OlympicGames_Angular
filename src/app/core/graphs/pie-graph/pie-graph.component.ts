@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -10,10 +10,11 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './pie-graph.component.scss'
 })
 export class PieGraphComponent implements OnInit {
-  public pieChartLabels = [ 'Sales', 'Store', 'Mail Sales' ];
-  public pieChartDatasets = [ {
-    data: [ 300, 500, 100 ]
-  } ];
+  @Input() chartLabels!: string[];
+  @Input() chartData!: number[];
+
+  public pieChartLabels!: string[];
+  public pieChartDatasets!: { data: number[]; }[];
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
@@ -23,6 +24,7 @@ export class PieGraphComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-
+    this.pieChartLabels = this.chartLabels;
+    this.pieChartDatasets = [{ data: this.chartData }];
   }
 }
