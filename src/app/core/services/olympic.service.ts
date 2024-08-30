@@ -11,6 +11,7 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<OlympicCountry[]>([]);
   private totalOfMedal: number = 0;
+  public olympicData!: OlympicCountry[];
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,7 @@ export class OlympicService {
       take(1),
       tap((olympicCountries) => {
         this.olympics$.next(olympicCountries);
+        this.olympicData = olympicCountries;
         olympicCountries.forEach(olympicCountry => {
           for (let index = 0; index < olympicCountry.participations.length; index++) {
             this.totalOfMedal += olympicCountry.participations[index].medalsCount;
@@ -39,5 +41,9 @@ export class OlympicService {
 
   getOlympics(): Observable<OlympicCountry[]> {
     return this.olympics$.asObservable();
+  }
+
+  getOlympicsData(): OlympicCountry[] {
+    return this.olympicData;
   }
 }
