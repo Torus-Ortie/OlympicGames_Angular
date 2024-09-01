@@ -24,7 +24,7 @@ export class PieGraphComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.pieChartLabels = this.chartLabels;
-    this.pieChartDatasets = [{ data: this.chartData }];
+    this.pieChartLabels = this.chartLabels ? this.chartLabels : ['France', 'Italy', 'Espagne'];
+    this.pieChartDatasets = [{ data: this.chartData ? this.chartData : [40, 80, 60] }];
   }
 }

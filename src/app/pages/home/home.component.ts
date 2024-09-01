@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule  } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -9,27 +9,23 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, PieGraphComponent],
+  imports: [AsyncPipe, RouterLink, PieGraphComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<OlympicCountry[]> = of([]);
-  private countryId!: string;
-  private olympicDatas!: OlympicCountry[];
-  // test
-  public chartLabels: string[] = ['France', 'Italy', 'Espagne'];
-  public chartData: number[] = [40, 80, 60];
-  //
-
+  public olympicsCountries$: Observable<string[]> = of([]);
+  public olympicsMedals$: Observable<number[]> = of([]);
+  public olympicsMedalsPerCountry$: Observable<{countries: string[]; medals: number[]}> = of({countries: [], medals: []});
+  public olympicsStats$: Observable<{ ngOfCountry: number; nbOfJOs: number; }> = of({ngOfCountry: 0, nbOfJOs: 0});
+  
   constructor(private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-    this.olympicDatas = this.olympicService.getOlympicsData();
+    this.olympicsMedalsPerCountry$ = this.olympicService.getAllMedalsPerCountry();
+    this.olympicsStats$ = this.olympicService.getStatsOlympics();
   }
 
- onCountrySelect(): void {
-  this.router.navigateByUrl(this.countryId); // <button (click)="onViewFaceSnap()">VIEW</button> sur les click du graph ou légende ?
- }
 }

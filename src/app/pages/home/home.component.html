@@ -5,13 +5,23 @@
     <div class="home-title">
         <h1>Medals per Country</h1>
     </div>
-    @for (olympicCountry of (olympics$ | async); track olympicCountry.id) {
-        <div class="graph-country">
-            <p>{{ olympicCountry.totalOfMedal }}</p>
-            <p>{{ olympicCountry.country }}</p>
-        </div>
-    }
+    <div class="home-stats-JOs">
+        <p>Number of JOs</p>
+        @if ((olympicsStats$ | async); as olympicsStats) {
+            <p>{{olympicsStats.nbOfJOs}}</p>
+        }
+    </div>
+    <div class="home-stats-Countries">
+        <p>Number of countries</p>
+        @if ((olympicsStats$ | async); as olympicsStats) {
+            <p>{{olympicsStats.ngOfCountry}}</p>
+        }
+    </div>
     <div class="home-graph">
-        <app-pie-graph [chartData]="chartData" [chartLabels]="chartLabels"/>
+        @for (olympicsMedalsPerCountry of [(olympicsMedalsPerCountry$ | async)]; track olympicsMedalsPerCountry) {
+            @if (olympicsMedalsPerCountry) {
+                <app-pie-graph [chartData]="olympicsMedalsPerCountry.medals" [chartLabels]="olympicsMedalsPerCountry.countries"/>
+            }
+        }
     </div>
 </div>
