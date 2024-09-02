@@ -6,16 +6,18 @@
         <h1>Medals per Country</h1>
     </div>
     <div class="home-stats-JOs">
-        <p>Number of JOs</p>
+        <p>Number of JOs<br/>
         @if ((olympicsStats$ | async); as olympicsStats) {
-            <p>{{olympicsStats.nbOfJOs}}</p>
+            {{olympicsStats.nbOfJOs}}
         }
+        </p>
     </div>
-    <div class="home-stats-Countries">
-        <p>Number of countries</p>
+    <div class="home-stats-countries">
+        <p>Number of countries<br/>
         @if ((olympicsStats$ | async); as olympicsStats) {
-            <p>{{olympicsStats.ngOfCountry}}</p>
+            {{olympicsStats.ngOfCountry}}
         }
+        </p>
     </div>
     <div class="home-graph">
         @for (olympicsMedalsPerCountry of [(olympicsMedalsPerCountry$ | async)]; track olympicsMedalsPerCountry) {

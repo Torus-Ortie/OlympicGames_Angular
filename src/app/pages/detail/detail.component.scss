@@ -1,22 +1,45 @@
 .detail-page {
-    position: fixed;
-    top: 1%;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    display: grid;
+    grid-template-columns: repeat (3, 1fr);
+    grid-template-rows: repeat (4, 1fr);
+    grid-gap: 1%;
+}
+.detail-title {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+}
+.detail-stats-entries {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+.detail-stats-medals {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+.detail-stats-athletes {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
 }
 .detail-graph {
-    position: relative;
-    left: 50%;
-    transform: translate(-20%, 0%);
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
 }
-h1 {
-    text-align: center;
-    margin: 1%;
-    background-color: skyblue;
-    border-radius: 10em;
-    box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.5);
+.detail-back {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
 }
-p {
-    text-align: center;
-    margin: 1%;
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding: 1% 2%;
+    border: none;
+    box-shadow: rgb(73, 73, 73) 0.3em 0.3em 1em;
+    outline: none;
+    &:active {
+    transform: translate(1px, 1px);
+    }
 }

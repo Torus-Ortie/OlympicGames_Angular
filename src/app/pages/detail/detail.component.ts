@@ -1,6 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { BarGraphComponent } from 'src/app/core/graphs/bar-graph/bar-graph.component';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit{
   //
   public countryData$: Observable<{years: string[]; medals: number[]}> = of({years: [], medals: []});
   public countryStats$: Observable<{ ngOfEntries: number; ngOfMedals: number; nbOfAthletes: number; }> = of({ ngOfEntries: 0, ngOfMedals: 0, nbOfAthletes: 0 });
-  constructor(private olympicService: OlympicService, private route: ActivatedRoute) {}
+  constructor(private olympicService: OlympicService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const country = this.route.snapshot.params['country'];
@@ -29,4 +29,7 @@ export class DetailComponent implements OnInit{
     this.countryStats$ = this.olympicService.getStatsCountry(country);
   }
 
+  homeBack() {
+    this.router.navigateByUrl('');
+  }
 }
