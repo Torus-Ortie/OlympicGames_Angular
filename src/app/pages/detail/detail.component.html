@@ -1,1 +1,36 @@
-<p>detail works!</p>
+<div class="detail-page">
+    <div class="detail-title">
+        <h1>{{ graphTitle }}</h1>
+    </div>
+    <div class="detail-stats-entries">
+        <p>Number of entries<br/>
+        @if ((countryStats$ | async); as olympicsStats) {
+            {{olympicsStats.ngOfEntries}}
+        }
+        </p>
+    </div>
+    <div class="detail-stats-medals">
+        <p>Total number of medals<br/>
+        @if ((countryStats$ | async); as olympicsStats) {
+            {{olympicsStats.ngOfMedals}}
+        }
+        </p>
+    </div>
+    <div class="detail-stats-athletes">
+        <p>Total number of athletes<br/>
+        @if ((countryStats$ | async); as olympicsStats) {
+            {{olympicsStats.nbOfAthletes}}
+        }
+        </p>
+    </div>
+    <div class="detail-graph">
+        @for (countryData of [(countryData$ | async)]; track countryData) {
+            @if (countryData) {
+                <app-bar-graph [chartData]="countryData.medals" [chartLabels]="countryData.years"/>
+            }
+        }
+    </div>
+    <div class="detail-back">
+        <button (click)="homeBack()">Back</button>
+    </div>
+</div>
