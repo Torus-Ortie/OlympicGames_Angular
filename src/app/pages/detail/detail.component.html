@@ -2,5 +2,29 @@
     <div class="detail-title">
         <h1>{{ graphTitle }}</h1>
     </div>
-    <app-bar-graph [chartData]="chartData" [chartLabels]="chartLabels"/>
+    <div class="detail-stats-entries">
+        <p>Number of entries</p>
+        @if ((countryStats$ | async); as olympicsStats) {
+            <p>{{olympicsStats.ngOfEntries}}</p>
+        }
+    </div>
+    <div class="detail-stats-medals">
+        <p>Total number of medals</p>
+        @if ((countryStats$ | async); as olympicsStats) {
+            <p>{{olympicsStats.ngOfMedals}}</p>
+        }
+    </div>
+    <div class="detail-stats-athletes">
+        <p>Total number of athletes</p>
+        @if ((countryStats$ | async); as olympicsStats) {
+            <p>{{olympicsStats.nbOfAthletes}}</p>
+        }
+    </div>
+    <div class="detail-graph">
+        @for (countryData of [(countryData$ | async)]; track countryData) {
+            @if (countryData) {
+                <app-bar-graph [chartData]="countryData.medals" [chartLabels]="countryData.years"/>
+            }
+        }
+    </div>
 </div>

@@ -6,10 +6,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { provideHttpClient } from '@angular/common/http';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, BaseChartDirective, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, BaseChartDirective, HomeComponent, DetailComponent],
   providers: [provideHttpClient(), provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent],
 })

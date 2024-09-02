@@ -73,4 +73,42 @@ export class OlympicService {
       })
     );
   }
+
+  getCountryData(country: string): Observable<{years: string[]; medals: number[]}> {
+    return this.olympics$.pipe(
+      map((olympics) => { 
+        let yearsList: string[] = [];
+        let medalsList: number[] = [];
+        olympics.forEach((olympic) => {
+          if (olympic.country === country) {
+            olympic.participations.forEach((participation) => {
+              yearsList.push(participation.year.toString())
+              medalsList.push(participation.medalsCount)
+            })
+          }
+        })
+        return {years: yearsList, medals: medalsList};
+      })
+    );
+  }
+
+  getStatsCountry(country: string): Observable<{ ngOfEntries: number; ngOfMedals: number; nbOfAthletes: number; }> {
+    return this.olympics$.pipe(
+      map((olympics) => { 
+        let ngOfEntries: number = 0;
+        let ngOfMedals: number = 0;
+        let nbOfAthletes: number = 0;
+        olympics.forEach((olympic) => {
+          if (olympic.country === country) {
+            ngOfEntries = olympic.participations.length;
+            olympic.participations.forEach((participation) => {
+              ngOfMedals += participation.medalsCount;
+              nbOfAthletes += participation.athleteCount;
+            })
+          }
+        })
+        return {ngOfEntries: ngOfEntries, ngOfMedals: ngOfMedals, nbOfAthletes: nbOfAthletes};
+      })
+    );
+  }
 }

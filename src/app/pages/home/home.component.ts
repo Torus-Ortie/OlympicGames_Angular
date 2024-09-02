@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   public olympicsMedalsPerCountry$: Observable<{countries: string[]; medals: number[]}> = of({countries: [], medals: []});
   public olympicsStats$: Observable<{ ngOfCountry: number; nbOfJOs: number; }> = of({ngOfCountry: 0, nbOfJOs: 0});
   
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
