@@ -13,13 +13,10 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrl: './detail.component.scss'
 })
 export class DetailComponent implements OnInit{
-  // test
-  public graphTitle: string = 'Italy';
-  public chartLabels: string[] = ['2012', '2016', '2020'];
-  public chartData: number[] = [30, 30, 40];
-  //
+  public graphTitle: string = '';
   public countryData$: Observable<{years: string[]; medals: number[]}> = of({years: [], medals: []});
   public countryStats$: Observable<{ ngOfEntries: number; ngOfMedals: number; nbOfAthletes: number; }> = of({ ngOfEntries: 0, ngOfMedals: 0, nbOfAthletes: 0 });
+  
   constructor(private olympicService: OlympicService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
