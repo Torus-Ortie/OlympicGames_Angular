@@ -1,11 +1,17 @@
 import { AsyncPipe, CommonModule  } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { PieGraphComponent } from 'src/app/core/graphs/pie-graph/pie-graph.component';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
+/**
+ * The home page of the application.
+ *
+ * @returns A web page with details about countries and their result during the last JOs
+ *
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -15,8 +21,6 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<OlympicCountry[]> = of([]);
-  public olympicsCountries$: Observable<string[]> = of([]);
-  public olympicsMedals$: Observable<number[]> = of([]);
   public olympicsMedalsPerCountry$: Observable<{countries: string[]; medals: number[]}> = of({countries: [], medals: []});
   public olympicsStats$: Observable<{ ngOfCountry: number; nbOfJOs: number; }> = of({ngOfCountry: 0, nbOfJOs: 0});
   

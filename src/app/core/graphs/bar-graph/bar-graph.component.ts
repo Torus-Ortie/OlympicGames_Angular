@@ -2,6 +2,18 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
+/**
+ * Manage bar graph component.
+ *
+ * @remarks
+ * This component use the {@link ng2-chats | ng2-chats}.
+ *
+ * @call <app-bar-graph [chartData]="chartData" [chartLabels]="chartLabels"/>
+ * @param chartData - A list of numbers corresponding to the data to display
+ * @param chartLabels - A list of strings corresponding to labels to display
+ * @returns A bar graph
+ *
+ */
 @Component({
   selector: 'app-bar-graph',
   standalone: true,
