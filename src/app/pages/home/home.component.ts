@@ -6,6 +6,12 @@ import { PieGraphComponent } from 'src/app/core/graphs/pie-graph/pie-graph.compo
 import { OlympicCountry } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
+/**
+ * The home page of the application.
+ *
+ * @returns A web page with details about countries and their result during the last JOs
+ *
+ */
 @Component({
   selector: 'app-home',
   standalone: true,

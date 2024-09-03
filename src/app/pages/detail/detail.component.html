@@ -24,10 +24,15 @@
         </p>
     </div>
     <div class="detail-graph">
-        @for (countryData of [(countryData$ | async)]; track countryData) {
-            @if (countryData) {
-                <app-bar-graph [chartData]="countryData.medals" [chartLabels]="countryData.years"/>
+        @if ((countryData$ | async)?.years?.length) {
+            @for (countryData of [(countryData$ | async)]; track countryData) {
+                @if (countryData) {
+                    <app-bar-graph [chartData]="countryData.medals" [chartLabels]="countryData.years"/>
+                }
             }
+        } @else {
+            <p class="error">Country doesn't existe or didn't participate to JOs<br/>
+                Please click on Back button and select a country.</p>
         }
     </div>
     <div class="detail-back">

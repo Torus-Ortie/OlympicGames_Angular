@@ -5,6 +5,13 @@ import { Observable, of } from 'rxjs';
 import { BarGraphComponent } from 'src/app/core/graphs/bar-graph/bar-graph.component';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
+/**
+ * The detail page specific to one country.
+ *
+ * @param country - The country to observe
+ * @returns A web page with several details about the result of the country during the last JOs
+ *
+ */
 @Component({
   selector: 'app-detail',
   standalone: true,

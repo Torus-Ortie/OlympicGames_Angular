@@ -3,16 +3,23 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
 import { OlympicCountry } from '../models/Olympic';
+import { ErrorHandlerService } from './error-handler.service';
 
+/**
+ * Manage all function about observables.
+ *
+ * @param country - The country to observe
+ * @returns Customize observables
+ *
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<OlympicCountry[]>([]);
-  public olympics!: OlympicCountry[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {}
 
   loadInitialData(): Observable<OlympicCountry[]> {
     return this.http.get<OlympicCountry[]>(this.olympicUrl).pipe(
@@ -21,27 +28,14 @@ export class OlympicService {
         this.olympics$.next(olympicCountries);
       }),
       catchError((error, caught) => {
-        // TODO: improve error handling
-        console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
         this.olympics$.next([]);
-        return caught;
+        return this.errorHandler.handle(error, caught);
       })
     );
   }
 
   getOlympics(): Observable<OlympicCountry[]> {
     return this.olympics$.asObservable();
-  }
-
-  getAllCountries(): Observable<string[]> {
-    return this.olympics$.pipe(
-      map((olympics) => { 
-        let countriesList: string[] = [];
-        olympics.forEach((olympic) => countriesList.push(olympic.country))
-        return countriesList;
-      })
-    );
   }
 
   getAllMedalsPerCountry(): Observable<{countries: string[]; medals: number[]}> {
@@ -51,10 +45,10 @@ export class OlympicService {
         let countriesList: string[] = [];
         olympics.forEach((olympic) => {
           let totalMedals: number = 0;
-          countriesList.push(olympic.country)
-          olympic.participations.forEach((participation) => totalMedals += participation.medalsCount)
-          totalMedalsList.push(totalMedals)
-      })
+          countriesList.push(olympic.country);
+          olympic.participations.forEach((participation) => totalMedals += participation.medalsCount);
+          totalMedalsList.push(totalMedals);
+        });
         return {countries: countriesList, medals: totalMedalsList};
       })
     );
@@ -67,8 +61,8 @@ export class OlympicService {
         let nbOfJOsList: number[] = [];
         olympics.forEach((olympic) => {
           ngOfCountry ++;
-          nbOfJOsList.push(olympic.participations.length)
-        })
+          nbOfJOsList.push(olympic.participations.length);
+        });
         return {ngOfCountry: ngOfCountry, nbOfJOs: Math.max(...nbOfJOsList)};
       })
     );
@@ -82,11 +76,11 @@ export class OlympicService {
         olympics.forEach((olympic) => {
           if (olympic.country === country) {
             olympic.participations.forEach((participation) => {
-              yearsList.push(participation.year.toString())
-              medalsList.push(participation.medalsCount)
-            })
+              yearsList.push(participation.year.toString());
+              medalsList.push(participation.medalsCount);
+            });
           }
-        })
+        });
         return {years: yearsList, medals: medalsList};
       })
     );
@@ -104,9 +98,9 @@ export class OlympicService {
             olympic.participations.forEach((participation) => {
               ngOfMedals += participation.medalsCount;
               nbOfAthletes += participation.athleteCount;
-            })
+            });
           }
-        })
+        });
         return {ngOfEntries: ngOfEntries, ngOfMedals: ngOfMedals, nbOfAthletes: nbOfAthletes};
       })
     );
