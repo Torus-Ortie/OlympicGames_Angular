@@ -3,17 +3,17 @@
         <img src="../../../assets/TeleSportLogo.png" alt="TéléSport logo">
     </div>
     <div class="home-title">
-        <h1>Medals per Country</h1>
+        <h1 style="font-size:4vw;">Medals per Country</h1>
     </div>
     <div class="home-stats-JOs">
-        <p>Number of JOs<br/>
+        <p style="font-size:2vw;">Number of JOs<br/>
         @if ((olympicsStats$ | async); as olympicsStats) {
             {{olympicsStats.nbOfJOs}}
         }
         </p>
     </div>
     <div class="home-stats-countries">
-        <p>Number of countries<br/>
+        <p style="font-size:2vw;">Number of countries<br/>
         @if ((olympicsStats$ | async); as olympicsStats) {
             {{olympicsStats.ngOfCountry}}
         }

@@ -1,23 +1,23 @@
 <div class="detail-page">
     <div class="detail-title">
-        <h1>{{ graphTitle }}</h1>
+        <h1 style="font-size:4vw;">{{ graphTitle }}</h1>
     </div>
     <div class="detail-stats-entries">
-        <p>Number of entries<br/>
+        <p style="font-size:2vw;">Number of entries<br/>
         @if ((countryStats$ | async); as olympicsStats) {
             {{olympicsStats.ngOfEntries}}
         }
         </p>
     </div>
     <div class="detail-stats-medals">
-        <p>Total number of medals<br/>
+        <p style="font-size:2vw;">Total number of medals<br/>
         @if ((countryStats$ | async); as olympicsStats) {
             {{olympicsStats.ngOfMedals}}
         }
         </p>
     </div>
     <div class="detail-stats-athletes">
-        <p>Total number of athletes<br/>
+        <p style="font-size:2vw;">Total number of athletes<br/>
         @if ((countryStats$ | async); as olympicsStats) {
             {{olympicsStats.nbOfAthletes}}
         }
